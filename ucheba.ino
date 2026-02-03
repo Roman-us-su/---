@@ -1,21 +1,20 @@
 
-const int led =9;
+const int led =9, Button=2;
+
 void setup() {
 pinMode (led, OUTPUT);
-
+pinMode (Button,INPUT);
 }
 
 void loop() {
 
-for (int i=0; i<256; i++){
-  analogWrite (led,i);
-  delay (50);
+if (digitalRead (Button) == LOW) {
+
+  digitalWrite (led,LOW);
+}
+else {
+  digitalWrite (led,HIGH);
 }
 
-for (int i=255; i > 0; i--){
-
-analogWrite (led,i);
-delay (50);
-}
 
 }
