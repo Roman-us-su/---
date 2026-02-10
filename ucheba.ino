@@ -1,9 +1,8 @@
-const int potenc=A5, svet=9;
+const int temperatura=A5, svet=9;
 
 void setup (){
 
-pinMode (potenc, INPUT);
-pinMode (svet,OUTPUT);
+
 
 Serial.begin(9600);
 
@@ -12,11 +11,15 @@ Serial.begin(9600);
 
 void loop (){
 
-  int current = analogRead(potenc)/4;
-  
-  analogWrite (svet,current);
-  Serial.print (current);
-  Serial.print ("\t");
-  Serial.println(svet);
+  int current = analogRead(temperatura);
 
+  float voltage = (current * 5.0)/1024.0;
+
+  
+ Serial.print(voltage); Serial.println(" вольты");
+
+ float tempC = voltage *100;
+
+Serial.print (tempC); Serial.println ("температура");
+delay (1000);
 }
