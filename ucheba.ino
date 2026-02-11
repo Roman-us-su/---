@@ -1,25 +1,27 @@
-const int temperatura=A5, svet=9;
+#include <DHT11.h>
+
+DHT11 dht11 (10);
 
 void setup (){
 
-
-
-Serial.begin(9600);
-
+  Serial.begin(9600);
 }
-
 
 void loop (){
 
-  int current = analogRead(temperatura);
+int temper = 0;
+int vlag = 0;
+int current = dht11.readTemperatureHumidity (temper,vlag);
 
-  float voltage = (current * 5.0)/1024.0;
+if (current ==0){//функция работает так что если current == 0 то значит данные с датчика идут и их можно вывожить
+// иначе данные останутсяь 0 0 
+  Serial.print("температура"); Serial.println(temper);
+  Serial.print("влажность"); Serial.println(vlag);
+    Serial.print("current"); Serial.println(current);
 
-  
- Serial.print(voltage); Serial.println(" вольты");
+  delay (300);
 
- float tempC = voltage *100;
-
-Serial.print (tempC); Serial.println ("температура");
-delay (1000);
+}else {
+  Serial.print(DHT11::getErrorString(current));
+}
 }
